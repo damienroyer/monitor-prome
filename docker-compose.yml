@@ -62,6 +62,18 @@ services:
       replicas: 1
     network_mode: "host"
 
+  promteams:
+    image: quay.io/prometheusmsteams/prometheus-msteams
+    container_name: promteams
+    ports:
+      - "2000:2000"
+    deploy:
+      replicas: 1
+    environment:
+      - TEAMS_INCOMING_WEBHOOK_URL=https://outlook.office.com/webhook/b9186ba3-29ad-4ed7-a459-2b9796b6948b@901cb4ca-b862-4029-9306-e5cd0f6d9f86/IncomingWebhook/3d937ced0e77416c9966bf2a366b4900/94e73537-0b88-4676-bf0f-03bc408e981d
+      - TEAMS_REQUEST_URI=alertmanager
+    network_mode: "host"
+
 volumes:
   prometheus-data:
   grafana-data:
