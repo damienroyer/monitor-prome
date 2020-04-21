@@ -22,6 +22,16 @@ groups:
         summary: "Node has swap out (instance {{ $labels.instance }})"
         description: "<!channel>  La VM SWAP (out)  LABELS: {{ $labels.job }} : {{ $labels.instance }}"
 
+#    - alert: WebsiteDown
+#      expr: probe_http_duration_seconds{phase="connect"} = 0
+#      for: 10s
+#      labels:
+#        severity: critique
+#      annotations:
+#        identifier: "{{ $labels.instance }}"
+#        summary: "The website {{ $labels.instance }} is down"
+#        description: "<!channel> Le site est DOWN! LABELS: {{ $labels.job }} : {{ $labels.instance }}"
+
     - alert: OutOfInodes
       expr: node_filesystem_files_free{mountpoint ="/rootfs"} / node_filesystem_files{mountpoint ="/rootfs"} * 100 < 10
       for: 15m

@@ -26,8 +26,13 @@ scrape_configs:
 
   - job_name: 'localhost'     # <-- j'ai mis ce titre de job mais le truc c'est de mettre un nom de job explicite
     static_configs:
-            - targets: ['40.89.176.129:9100','20.188.45.40:9100']
+            - targets: ['default-group1-web.francecentral.cloudapp.azure.com:9100','default-group1-database.francecentral.cloudapp.azure.com:9100','default-group1-web.francecentral.cloudapp.azure.com:7070']
     scrape_interval: 5s
+
+    # - job_name: 'cadvisor'
+    #scrape_interval: 5s
+    #static_configs:
+    #       - targets: ['default-group1-web.francecentral.cloudapp.azure.com:7070']
 
     ### configuration de blackbox, notre probe http 
 
@@ -48,3 +53,4 @@ scrape_configs:
     static_configs:
       - targets: 
         - http://localhost:9090,prometheus
+        - http://default-group1-web.francecentral.cloudapp.azure.com/vote,website
